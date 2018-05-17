@@ -9,7 +9,7 @@
 &emsp;&emsp;Quasar允许开发者在只写一次代码的情况下发布到多个平台 website, PWA ,Mobile App 和 Electron App 在使用Quasar的时候, 你甚至不需要Hammerjs, Momentjs, 或者Bootstrap, Quasar框架内包含了已经这些东西,你可以很简单就使用到。
 &emsp;&emsp;vue-quasar-admin是基于Quasar-Framework搭建的一套包含通用权限控制的后台管理系统(目前只针对PC端)。
 
-[![](https://ci.appveyor.com/api/projects/status/github/gruntjs/grunt?branch=master&svg=true)]()
+[![](https://ci.appveyor.com/api/projects/status/github/wjkang/vue-quasar-admin?branch=master&svg=true)]()
 [![vue](https://img.shields.io/badge/vue-2.5.16-brightgreen.svg)](https://github.com/vuejs/vue)
 [![quasar framework](https://img.shields.io/badge/quasar-0.15.14-brightgreen.svg)](https://quasar-framework.org/)
 [![MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)]()
