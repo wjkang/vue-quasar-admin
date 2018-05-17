@@ -164,4 +164,30 @@ npm run production
 
 ## 效果展示
 
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/1.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/2.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/3.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/4.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/5.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/6.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/7.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/8.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/9.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/10.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/11.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/12.jpg)
+
+![image](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/13.jpg)
+
 
