@@ -1,0 +1,32 @@
+{
+  "name": "vue-quasar-admin",
+  "version": "1.0.0",
+  "description": "A Quasar Framework app",
+  "productName": "vue-quasar-admin",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "wjk <977865769@qq.com>",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "mavon-editor": "^2.6.3",
+    "vuelidate": "^0.6.2"
+  },
+  "devDependencies": {
+    "quasar-cli": "^0.15.14",
+    "vue-markdown-loader": "^2.4.1",
+    "cheerio": "^1.0.0-rc.2",
+    "markdown-it-container": "^2.0.0"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}

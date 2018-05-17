@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="<%= htmlWebpackPlugin.options.productDescription %>">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (htmlWebpackPlugin.options.ctx.mode.cordova) { %>, viewport-fit=cover<% } %>">
+  <title>
+    <%= htmlWebpackPlugin.options.productName %>
+  </title>
+
+  <link rel="icon" href="statics/quasar-logo.png" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="statics/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="statics/icons/favicon-16x16.png">
+
+  <% if (htmlWebpackPlugin.options.ctx.mode.pwa) { %>
+    <!-- Add to home screen for Android and modern mobile browsers -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="<%= htmlWebpackPlugin.options.pwaManifest.theme_color %>">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="<%= htmlWebpackPlugin.options.pwaManifest.background_color %>">
+    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.pwaManifest.name %>">
+    <link rel="apple-touch-icon" href="statics/icons/apple-icon-152x152.png">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="statics/icons/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="<%= htmlWebpackPlugin.options.pwaManifest.background_color %>">
+    <% } %>
+
+      <%= htmlWebpackPlugin.options.headScripts %>
+
+        <!--
+      The following is optional if you DON'T build for PWA.
+      Preloads/prefetches chunks/assets.
+    -->
+        <% if (!['cordova', 'electron'].includes(htmlWebpackPlugin.options.ctx.modeName) && htmlWebpackPlugin.options.ctx.prod) {
+        for (var chunk of webpack.chunks) {
+          for (var file of chunk.files) {
+            if (file.match(/\.(js|css)$/)) { %>
+          <link rel="<%= chunk.initial ? 'preload' : 'prefetch' %>" href="<%= file %>" as="<%= file.match(/\.css$/)? 'style' : 'script' %>">
+          <% }}}} %>
+            <style type="text/css">
+              #StartLoading {
+                top: 50%;
+                left: 50%;
+                position: absolute;
+                -webkit-transform: translateY(-50%) translateX(-50%);
+                transform: translateY(-50%) translateX(-50%);
+                z-index: 100;
+              }
+
+              @-webkit-keyframes ball-beat {
+                50% {
+                  opacity: 0.2;
+                  -webkit-transform: scale(0.75);
+                  transform: scale(0.75);
+                }
+
+                100% {
+                  opacity: 1;
+                  -webkit-transform: scale(1);
+                  transform: scale(1);
+                }
+              }
+
+              @keyframes ball-beat {
+                50% {
+                  opacity: 0.2;
+                  -webkit-transform: scale(0.75);
+                  transform: scale(0.75);
+                }
+
+                100% {
+                  opacity: 1;
+                  -webkit-transform: scale(1);
+                  transform: scale(1);
+                }
+              }
+
+              .ball-beat>div {
+                background-color: #279fcf;
+                width: 15px;
+                height: 15px;
+                border-radius: 100% !important;
+                margin: 2px;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+                display: inline-block;
+                -webkit-animation: ball-beat 0.7s 0s infinite linear;
+                animation: ball-beat 0.7s 0s infinite linear;
+              }
+
+              .ball-beat>div:nth-child(2n-1) {
+                -webkit-animation-delay: 0.35s !important;
+                animation-delay: 0.35s !important;
+              }
+            </style>
+</head>
+
+<body>
+  <% if (!htmlWebpackPlugin.options.ctx.mode.electron) { %>
+    <noscript>
+      This is your fallback content in case JavaScript fails to load.
+    </noscript>
+    <% } %>
+      <div id="StartLoading">
+        <div class="loader-inner ball-beat">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <!-- DO NOT touch the following <div> -->
+      <div id="q-app"></div>
+
+      <!-- DO NOT touch the following -->
+      <%= htmlWebpackPlugin.options.bodyScripts %>
+
+        <!-- built files will be auto injected here -->
+</body>
+
+</html>
