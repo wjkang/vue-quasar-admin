@@ -10,7 +10,7 @@
 
                     <!-- <span slot="subtitle">Header Subtitle</span> -->
                 </q-toolbar-title>
-                <a href="https://coding.net/u/jaycewu/p/quasar.admin/git?public=true" class="text-white" target="_blank">
+                <a href="https://github.com/wjkang/vue-quasar-admin" class="text-white" target="_blank">
                     <q-btn flat round icon="fab fa-github"> </q-btn>
                 </a>
                 <router-link :to="{ name: 'requestlog'}" tag="label">
