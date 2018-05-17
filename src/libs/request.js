@@ -8,7 +8,7 @@ import { Notify } from 'quasar'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.API, // api的base_url
-  timeout: 5000 // request timeout
+  timeout: 20000 // request timeout
 })
 
 // request interceptor
