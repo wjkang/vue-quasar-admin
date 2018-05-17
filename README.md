@@ -116,10 +116,10 @@ quasar build
 ### 安装后台程序
 
 
-[后台程序](https://coding.net/u/jaycewu/p/quasar.admin/git?public=true)
+[后台程序](https://github.com/wjkang/quasar-admin-server)
 
 ```bush
-git clone https://git.coding.net/jaycewu/quasar.admin.git
+git clone https://github.com/wjkang/quasar-admin-server.git
 ```
 
 ## Install
