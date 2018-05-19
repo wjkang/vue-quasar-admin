@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Router } from '@/router/index';
+import Router from '@/router/index';
 import { getToken, removeToken } from '@/libs/auth'
 import loading from '@/libs/loading'
 import permission from '@/libs/permission'
