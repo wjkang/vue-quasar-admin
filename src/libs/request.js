@@ -57,7 +57,7 @@ service.interceptors.response.use(
         })
       }
       setTimeout(() => {
-        router.push({
+        Router.push({
           name: "login"
         });
       }, 1000)
