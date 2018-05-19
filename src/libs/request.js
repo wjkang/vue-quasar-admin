@@ -67,7 +67,7 @@ service.interceptors.response.use(
         message: '系统错误!',
         position: 'bottom-right'
       })
-    } else if (error.message == "timeout of 5000ms exceeded") {
+    } else if (error.message.indexOf("timeout")>-1) {
       Notify.create({
         message: '网络超时!',
         position: 'bottom-right'
