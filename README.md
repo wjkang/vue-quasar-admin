@@ -26,6 +26,10 @@
 
 请不要随意修改账号名称，其他操作随意，可通过右上角"数据初始化"按钮初始化数据
 
+## 系统流程图
+
+![](https://raw.githubusercontent.com/wjkang/vue-quasar-admin/master/screenshot/flowchart.png)
+
 ## 功能与特点
 
 - 真实后端数据支持
