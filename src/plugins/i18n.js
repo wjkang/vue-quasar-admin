@@ -13,7 +13,7 @@ export default ({ app, router, store, Vue }) => {
   // new Vue({..., i18n: ... }).$mount(...)
 
   app.i18n = new VueI18n({
-    locale: 'pt-br',    // zh-hans, en-us, pt-br
+    locale: 'en-us',    // zh-hans, en-us, pt-br
     fallbackLocale: 'en-us',
     messages
   })
