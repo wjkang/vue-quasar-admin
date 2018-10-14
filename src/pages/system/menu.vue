@@ -2,52 +2,54 @@
   <div class="row" style="padding:10px">
     <div class="col-4 shadow-6 padding-10">
       <q-scroll-area style="height: 580px;">
-        <p class="caption" v-show="editingMenu.label">正在编辑
+        <p class="caption" v-show="editingMenu.label">{{$t('Editing')}}
           <q-chip small> {{editingMenu.label}}</q-chip>
         </p>
         <div class="q-mb-sm">
-          <q-btn size="sm" color="primary" @click="addMenu(1)" label="新增顶级菜单" />
-          <q-btn v-if="selected" size="sm" color="red" @click="addMenu(2)" label="新增子菜单" />
+          <q-btn size="sm" color="primary" @click="addMenu(1)" :label="$t('Add top menu')" />
+          <q-btn v-if="selected" size="sm" color="red" @click="addMenu(2)" :label="$t('Add a submenu')" />
         </div>
         <q-tree :nodes="menuList" default-expand-all :selected.sync="selected" node-key="id" />
       </q-scroll-area>
     </div>
+
     <div class="col-7 shadow-6" style="margin-left:10px">
       <q-card inline class="fit">
         <q-card-title>
-          <q-chip square small v-html="tempMenu.id?'编辑菜单':'新增菜单'"></q-chip>
+          <q-chip square small :v-html="'\'' + (tempMenu.id ? $t('Edit menu') : $t('Add menu')) + '\''"></q-chip>
           <q-icon slot="right" name="edit" />
         </q-card-title>
         <q-card-main style="height:80%">
           <q-field :count="15" :error="$v.tempMenu.name.$error" error-label="error">
-            <q-input v-model="tempMenu.name" float-label="名称" @blur="$v.tempMenu.name.$touch" />
+            <q-input v-model="tempMenu.name" :float-label="$t('Name')" @blur="$v.tempMenu.name.$touch" />
           </q-field>
           <q-field :count="15" :error="$v.tempMenu.label.$error" error-label="error">
-            <q-input v-model="tempMenu.label" float-label="标题" @blur="$v.tempMenu.label.$touch" />
+            <q-input v-model="tempMenu.label" :float-label="$t('Title')" @blur="$v.tempMenu.label.$touch" />
           </q-field>
           <q-field :count="20">
-            <q-input v-model="tempMenu.functionCode" float-label="权限码" />
+            <q-input v-model="tempMenu.functionCode" :float-label="$t('Authority code')" />
           </q-field>
           <q-field>
-            <q-input v-model="tempMenu.sort" type="number" float-label="排序" />
+            <q-input v-model="tempMenu.sort" type="number" :float-label="$t('Sort')" />
           </q-field><br>
-          <q-toggle v-model="tempMenu.leftMemu" label="是否左侧显示" /><br/><br/>
-          <q-toggle v-model="tempMenu.isLock" label="是否锁定" /><br/><br/>
-          <q-btn :icon="tempMenu.icon" class="bg-brown-5 text-white" label="选择图标" @click="openIconModal" />
+          <q-toggle v-model="tempMenu.leftMemu" :label="$t('Display on the left')" /><br/><br/>
+          <q-toggle v-model="tempMenu.isLock" :label="$t('Lock')" /><br/><br/>
+          <q-btn :icon="tempMenu.icon" class="bg-brown-5 text-white" :label="$t('Select icon')" @click="openIconModal" />
         </q-card-main>
         <q-card-separator />
         <q-card-actions align="end">
-          <q-btn color="primary" @click="saveMenu">保存</q-btn>
-          <q-btn color="red">取消</q-btn>
+          <q-btn color="primary" @click="saveMenu">{{$t('Save')}}</q-btn>
+          <q-btn color="red">{{$t('Cancel')}}</q-btn>
         </q-card-actions>
       </q-card>
     </div>
+
     <q-modal v-model="iconModal" :content-css="{minWidth: '80vw', minHeight: '80vh'}">
       <q-modal-layout>
         <q-toolbar slot="header">
           <q-btn flat round dense @click="iconModal = false" icon="reply" />
           <q-toolbar-title>
-            选择图标
+            {{$t('Select icon')}}
           </q-toolbar-title>
         </q-toolbar>
 
@@ -58,15 +60,15 @@
         <q-toolbar slot="footer">
           <q-toolbar-title>
           </q-toolbar-title>
-          <q-btn :disable="tempIcon==''" round @click="selectIcon">选择</q-btn>
-          <q-btn round color="red" @click="iconModal = false">取消</q-btn>
+          <q-btn :disable="tempIcon==''" round @click="selectIcon">{{$t('Select')}}</q-btn>
+          <q-btn round color="red" @click="iconModal = false">{{$t('Cancel')}}</q-btn>
         </q-toolbar>
 
         <div class="layout-padding">
           <div class="row">
             <div class="icon-view" v-for="icon in iconList" :key="icon.name" @click="tempIcon=icon.name">
               <q-icon :name="icon.name" size="40px" :color="icon.name==tempIcon?'primary':'grey-4'">
-                <q-tooltip>{{icon.title}}</q-tooltip>
+                <q-tooltip>{{$t(icon.title)}}</q-tooltip>
               </q-icon>
             </div>
           </div>
@@ -3953,7 +3955,7 @@ export default {
         this.editingMenu.sort = this.tempMenu.sort;
         this.$q.notify({
           type: "positive",
-          message: "保存成功",
+          message: this.$t("Saved successfully"),
           position: "bottom-right"
         });
       } catch (e) {}

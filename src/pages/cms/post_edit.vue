@@ -3,13 +3,13 @@
     <div class="col-9">
       <q-card inline class="fit shadow-6">
         <div class="row q-ma-lg q-pa-md">
-          <div class="col-1">标题：</div>
+          <div class="col-1">{{$t('Title')}}：</div>
           <div class="col">
             <q-input v-model="post.title" />
           </div>
         </div>
         <div class="row q-ma-lg q-pa-md">
-          <div class="col-1">简述：</div>
+          <div class="col-1">{{$t('Brief')}}：</div>
           <div class="col">
             <q-input type="textarea" v-model="post.shortContent" />
           </div>
@@ -23,49 +23,49 @@
       <q-card inline class="fit shadow-6 q-pa-md">
         <q-card-main>
           <div class="row q-mt-md">
-            <div class="col-4" style="line-height:40px">分类:</div>
+            <div class="col-4" style="line-height:40px">{{$t('Classification')}}:</div>
             <div class="col-5">
               <q-select inverted color="primary" placeholder="--请选择--" separator v-model="post.catelog" :options="catelogs" v-ripple />
             </div>
           </div>
           <div class="row q-mt-lg">
-            <div class="col-4">系统标签:</div>
+            <div class="col-4">{{$t('System label')}}:</div>
             <div class="col-5">
               <q-select multiple chips color="purple" placeholder="--请选择--" v-model="post.tags" :options="tagOptions" />
             </div>
           </div>
           <div class="row q-mt-lg">
-            <div class="col-4">关键词:</div>
+            <div class="col-4">{{$t('Keywords')}}:</div>
             <div class="col-5">
               <q-chips-input color="secondary" v-model="post.keyWord" placeholder="" />
             </div>
           </div>
           <div class="row q-mt-lg">
-            <div class="col-4">排序:</div>
+            <div class="col-4">{{$t('Sort')}}:</div>
             <div class="col-5">
               <q-input type="number" v-model="post.sort" min="0" />
             </div>
           </div>
           <div class="row q-mt-lg">
-            <div class="col-4">发布时间:</div>
+            <div class="col-4">{{$t('Release time')}}:</div>
             <div class="col">
               <q-datetime color="purple" v-model="post.publishedDate" type="datetime" />
             </div>
           </div>
           <div class="row q-mt-lg">
-            <div class="col-2" style="line-height:35px">状态:</div>
+            <div class="col-2" style="line-height:35px">{{$t('Status')}}:</div>
             <div class="col">
               <q-option-group inline type="radio" color="secondary" v-model="post.status" :options="[
-          { label: '草稿', value: 1, color: 'faded'},
-          { label: '发布', value: 2, color: 'primary'},
-          { label: '删除', value: 3, color: 'red' }
+          { label: $t('Draft'), value: 1, color: 'faded'},
+          { label: $t('Release'), value: 2, color: 'primary'},
+          { label: $t('Delete'), value: 3, color: 'red' }
         ]" />
             </div>
           </div>
         </q-card-main>
         <q-card-separator />
         <q-card-actions align="end">
-          <q-btn push class="bg-primary text-white" @click="savePost">保存</q-btn>
+          <q-btn push class="bg-primary text-white" @click="savePost">{{$t('Save')}}</q-btn>
         </q-card-actions>
       </q-card>
     </div>
@@ -103,26 +103,26 @@ export default {
       },
       catelogs: [
         {
-          label: "首页通知",
-          value: "首页通知"
+          label: this.$t("Home notification"),
+          value: this.$t("Home notification")
         },
         {
-          label: "前端",
-          value: "前端"
+          label: this.$t("Front end"),
+          value: this.$t("Front end")
         },
         {
-          label: "后端",
-          value: "后端"
+          label: this.$t("Back end"),
+          value: this.$t("Back end")
         },
         {
-          label: "生活",
-          value: "生活"
+          label: this.$t("Life"),
+          value: this.$t("Life")
         }
       ],
       tagOptions: [
         {
-          label: "wepack",
-          value: "wepack"
+          label: "webpack",
+          value: "webpack"
         },
         {
           label: "vue",
@@ -220,16 +220,16 @@ export default {
     async savePost() {
       let errorMsg = [];
       if (this.post.title == "") {
-        errorMsg.push("标题不能为空");
+        errorMsg.push(this.$t("The title can not be blank"));
       }
       if (this.post.shortContent == "") {
-        errorMsg.push("简述不能为空");
+        errorMsg.push(this.$t("Brief description cannot be empty"));
       }
       if (this.post.mdContent == "") {
-        errorMsg.push("内容不能为空");
+        errorMsg.push(this.$t("The content can not be blank"));
       }
       if (this.post.catelog == "") {
-        errorMsg.push("分类不能为空");
+        errorMsg.push(this.$t("Classification cannot be empty"));
       }
       if (errorMsg.length > 0) {
         this.$q.notify({
@@ -243,7 +243,7 @@ export default {
         await savePost(this.post);
         this.$q.notify({
           type: "positive",
-          message: "保存成功",
+          message: this.$t("Saved successfully"),
           position: "bottom-right"
         });
       } catch (e) {}

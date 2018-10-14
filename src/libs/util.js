@@ -60,7 +60,7 @@ util.setCurrentPath = function (vm, name) {
         return item.name === "home_index"
     })) {
         currentPathArr.push({
-            title: "首页",
+            title: this.$t("Home"),
             path: "/home",
             name: 'home_index'
         });

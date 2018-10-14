@@ -6,17 +6,18 @@
         <q-icon slot="right" name="edit" />
       </q-card-title> -->
       <q-card-main style="height:80%">
-        <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="none" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+        <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="none" row-key="id" :pagination.sync="serverPagination"
+                 @request="request" :loading="loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
           <template slot="top-left" slot-scope="props">
-            <q-input v-model="filter.name" type="text" prefix="角色名称：" />&nbsp;&nbsp;
-            <q-input v-model="filter.code" type="text" prefix="角色编码：" />&nbsp;&nbsp;
-            <q-btn push dense color="primary" icon="search" @click="search">查询</q-btn>&nbsp;&nbsp;
+            <q-input v-model="filter.name" type="text" :prefix="$t('Role name') + '：'" />&nbsp;&nbsp;
+            <q-input v-model="filter.code" type="text" :prefix="$t('Role code') + '：'" />&nbsp;&nbsp;
+            <q-btn push dense color="primary" icon="search" @click="search">{{$t('Search')}}</q-btn>&nbsp;&nbsp;
           </template>
           <template slot="top-right" slot-scope="props">
             <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
           </template>
           <q-td slot="body-cell-id" slot-scope="props" :props="props" style="width:200px">
-            <q-btn glossy dense color="primary" icon="edit" label="编辑权限" @click="editPermission(props)"></q-btn>
+            <q-btn glossy dense color="primary" icon="edit" :label="$t('Edit')" @click="editPermission(props)"></q-btn>
           </q-td>
         </q-table>
       </q-card-main>
@@ -26,15 +27,15 @@
         <q-toolbar slot="header">
           <q-btn flat round dense @click="editModal = false" icon="reply" />
           <q-toolbar-title>
-            编辑角色&nbsp;
-            <q-chip small>{{roleName}}</q-chip>&nbsp;权限
+            {{$t('Editing role')}}&nbsp;
+            <q-chip small>{{roleName}}</q-chip>&nbsp;{{$t('Permission')}}
           </q-toolbar-title>
         </q-toolbar>
         <q-toolbar slot="footer">
           <q-toolbar-title>
           </q-toolbar-title>
-          <q-btn round :disable="selected==0" @click="savePermission">保存</q-btn>
-          <q-btn round color="red" @click="editModal = false">取消</q-btn>
+          <q-btn round :disable="selected==0" @click="savePermission">{{$t('Save')}}</q-btn>
+          <q-btn round color="red" @click="editModal = false">{{$t('Cancel')}}</q-btn>
         </q-toolbar>
 
         <div class="row" gutter-xs style="padding:20px">
@@ -47,11 +48,12 @@
           <div class="col-8 shadow-6">
             <q-card inline class="fit">
               <q-card-title>
-                <q-chip square small>模块功能</q-chip>
+                <q-chip square small>{{$t('Module function')}}</q-chip>
                 <q-icon slot="right" name="edit" />
               </q-card-title>
               <q-card-main style="height:80%">
-                <q-collapsible v-for="item in moduleFunctions.moduleFunctions" :key="item.id" popup :opened="item.functions.length>0" :icon="item.icon" :label="item.title" :sublabel="item.name">
+                <q-collapsible v-for="item in moduleFunctions.moduleFunctions" :key="item.id" popup :opened="item.functions.length>0" 
+			:icon="item.icon" :label="item.title" :sublabel="item.name">
                   <div v-if="item.functions.length>0">
                     <q-option-group inline type="checkbox" color="primary" v-model="moduleFunctions.roleFunctions" :options="item.functions" />
                   </div>
@@ -85,14 +87,14 @@ export default {
         {
           name: "name",
           required: true,
-          label: "角色名称",
+          label: this.$t("Role name"),
           align: "left",
           field: "name",
           sortable: true
         },
         {
           name: "code",
-          label: "角色编码",
+          label: this.$t("Role code"),
           field: "code",
           sortable: true,
           align: "left"
@@ -100,7 +102,7 @@ export default {
         {
           name: "id",
           required: true,
-          label: "操作",
+          label: this.$t("ID"),
           align: "left",
           field: "id"
         }
@@ -225,7 +227,7 @@ export default {
       await savePermission(data);
       this.$q.notify({
         type: "positive",
-        message: "保存成功",
+        message: this.$t("Saved successfully"),
         position: "bottom-right"
       });
     }

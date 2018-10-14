@@ -3,16 +3,18 @@
         <div style="width:100%">
             <div class="tags-view-container">
                 <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
-                    <q-chip ref="tag" tag square v-ripple v-for="item in tagsList" :key="item.name" :name="item.name" :closable="item.name==='home_index'?false:true" :color="item.name===currentPageName?'secondary':'green-4'" :class="item.name===currentPageName?'active':''" style="margin-left:4px" @hide="closePage(item.name)" @click="linkTo(item)">{{item.title}}</q-chip>
+                    <q-chip ref="tag" tag square v-ripple v-for="item in tagsList" :key="item.name" :name="item.name"
+                            :closable="item.name==='home_index'?false:true" :color="item.name===currentPageName?'secondary':'green-4'"
+                            :class="item.name===currentPageName?'active':''" style="margin-left:4px" @hide="closePage(item.name)" @click="linkTo(item)">{{$t(item.title)}}</q-chip>
                 </scroll-pane>
             </div>
         </div>
-        <q-select inverted color="green-9" placeholder="标签选项" v-model="closeType" @input="tagManage" :options="[{
-          label: '关闭其他',
+        <q-select inverted color="green-9" :placeholder="$t('Label option')" v-model="closeType" @input="tagManage" :options="[{
+          label: $t('Close other'),
           value: 'other'
         },
         {
-          label: '关闭所有',
+          label: $t('Close all'),
           value: 'all'
         }]" />
     </q-toolbar>
@@ -21,6 +23,7 @@
 <script>
 import ScrollPane from "@/components/ScrollPane";
 import util from "@/libs/util.js";
+
 export default {
   components: { ScrollPane },
   data() {

@@ -6,13 +6,14 @@
         <q-icon slot="right" name="edit" />
       </q-card-title> -->
             <q-card-main style="height:80%">
-                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据">
+                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id"
+                         :pagination.sync="serverPagination" @request="request" :loading="loading" :rows-per-page-label="$t('Rows per page')">
                     <template slot="top-left" slot-scope="props">
-                        <q-input v-model="filter.module" type="text" prefix="模块名称：" />&nbsp;&nbsp;
-                        <q-input v-model="filter.name" type="text" prefix="功能名称：" />&nbsp;&nbsp;
-                        <q-input v-model="filter.code" type="text" prefix="功能编码：" />&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="search" @click="search">查询</q-btn>&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="add" @click="addFunction">新增</q-btn>
+                        <q-input v-model="filter.module" type="text" :prefix="$t('Module name') + '：'" />&nbsp;&nbsp;
+                        <q-input v-model="filter.name" type="text" :prefix="$t('Function name') + '：'" />&nbsp;&nbsp;
+                        <q-input v-model="filter.code" type="text" :prefix="$t('Function code') + '：'" />&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="search" @click="search">Search</q-btn>&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="add" @click="addFunction">{{$t('Add')}}</q-btn>
                     </template>
                     <template slot="top-right" slot-scope="props">
                         <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
@@ -32,28 +33,28 @@
                 <q-toolbar slot="header">
                     <q-btn flat round dense @click="editModal = false" icon="reply" />
                     <q-toolbar-title>
-                        编辑
+                       {{$t('Edit')}}
                     </q-toolbar-title>
                 </q-toolbar>
                 <q-toolbar slot="footer">
                     <q-toolbar-title>
                     </q-toolbar-title>
-                    <q-btn round @click="saveFunction">保存</q-btn>
-                    <q-btn round color="red" @click="editModal = false">取消</q-btn>
+                    <q-btn round @click="saveFunction">{{$t('Save')}}</q-btn>
+                    <q-btn round color="red" @click="editModal = false">{{$t('Cancel')}}</q-btn>
                 </q-toolbar>
 
                 <div class="layout-padding">
                     <q-field :count="15">
-                        <q-input v-model="tempFunction.name" float-label="功能名称" />
+                        <q-input v-model="tempFunction.name" :float-label="$t('Function name')" />
                     </q-field>
                     <q-field :count="15">
-                        <q-input v-model="tempFunction.code" float-label="功能编码" />
+                        <q-input v-model="tempFunction.code" :float-label="$t('Function code')" />
                     </q-field>
                     <q-field :count="20">
-                        <q-input v-model="tempFunction.description" type="textarea" :max-height="100" rows="7" float-label="功能描述" />
+                        <q-input v-model="tempFunction.description" type="textarea" :max-height="100" rows="7" :float-label="$t('Function description')" />
                     </q-field>
                     <q-chip small> {{tempFunction.module}}</q-chip>
-                    <q-btn class="bg-brown-5 text-white" label="选择模块" @click="selectModule" />
+                    <q-btn class="bg-brown-5 text-white" :label="$t('Selection module')" @click="selectModule" />
                 </div>
             </q-modal-layout>
         </q-modal>
@@ -62,14 +63,14 @@
                 <q-toolbar slot="header">
                     <q-btn flat round dense @click="menuModal = false" icon="reply" />
                     <q-toolbar-title>
-                        选择模块
+                      {{$t('Selection module')}}
                     </q-toolbar-title>
                 </q-toolbar>
                 <q-toolbar slot="footer">
                     <q-toolbar-title>
                     </q-toolbar-title>
-                    <q-btn round :disable="!menuSelected" @click="moduleChange">选择</q-btn>
-                    <q-btn round color="red" @click="menuModal = false">取消</q-btn>
+                    <q-btn round :disable="!menuSelected" @click="moduleChange">{{$t('Select')}}</q-btn>
+                    <q-btn round color="red" @click="menuModal = false">{{$t('Cancel')}}</q-btn>
                 </q-toolbar>
 
                 <div class="layout-padding">
@@ -103,21 +104,21 @@ export default {
         {
           name: "module",
           required: true,
-          label: "模块名称",
+          label: this.$t("Module name"),
           align: "left",
           field: "module",
           sortable: true
         },
         {
           name: "code",
-          label: "功能编码",
+          label: this.$t("Function code"),
           field: "code",
           sortable: true,
           align: "left"
         },
         {
           name: "name",
-          label: "功能名称",
+          label: this.$t("Function name"),
           field: "name",
           sortable: true,
           align: "left"
@@ -125,7 +126,7 @@ export default {
         {
           name: "id",
           required: true,
-          label: "操作",
+          label: this.$t("ID"),
           align: "left",
           field: "id"
         }
@@ -175,23 +176,23 @@ export default {
     async delFunction(id) {
       try {
         await this.$q.dialog({
-          title: "删除",
-          message: "确认执行删除操作？",
+          title: this.$t("Delete"),
+          message: this.$t("Confirm the deletion？"),
           position: "right",
           ok: {
             push: true,
-            label: "删除"
+            label: this.$t("Delete")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await delFunction({ id: id });
         this.$q.notify({
           type: "positive",
-          message: "删除成功",
+          message: this.$t("Successfully deleted"),
           position: "bottom-right"
         });
         this.search();
@@ -200,16 +201,16 @@ export default {
     async delFunctions() {
       try {
         await this.$q.dialog({
-          title: "批量删除",
-          message: "确认执行批量删除操作？",
+          title: this.$t("Batch deletion"),
+          message: this.$t("Confirm the bulk delete operation？"),
           ok: {
             push: true,
-            label: "删除"
+            label: this.$t("Delete")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await delFunctions({
@@ -221,7 +222,7 @@ export default {
         });
         this.$q.notify({
           type: "positive",
-          message: "批量删除成功",
+          message: this.$t("Successfully deleted"),
           position: "bottom-right"
         });
         this.selected = [];
@@ -299,7 +300,7 @@ export default {
       await saveFunction(this.tempFunction);
       this.$q.notify({
         type: "positive",
-        message: "保存成功",
+        message: this.$t("Saved successfully"),
         position: "bottom-right"
       });
       this.editModal = false;

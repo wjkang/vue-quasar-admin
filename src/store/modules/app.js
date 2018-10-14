@@ -6,14 +6,14 @@ const app = {
     state: {
         currentPath: [
             {
-                title: '首页',
+                title: 'Home',
                 path: '',
                 name: 'home_index'
             }
         ], // 面包屑数组
         pageOpenedList: [
             {
-                title: '首页',
+                title: 'Home',
                 path: '',
                 name: 'home_index'
             }
@@ -84,7 +84,7 @@ const app = {
             let name = data.name;
             if (type === "all") {
                 state.pageOpenedList = [{
-                    title: '首页',
+                    title: 'Home',
                     path: '',
                     name: 'home_index'
                 }]
@@ -101,7 +101,7 @@ const app = {
                         state.pageOpenedList = state.pageOpenedList.splice(i, 1, )
                         if (name !== "home_index") {
                             state.pageOpenedList.unshift({
-                                title: '首页',
+                                title: 'Home',
                                 path: '',
                                 name: 'home_index'
                             })

@@ -64,7 +64,7 @@ const appRouter = [
   },
   {
     path: '/system',
-    name: '系统设置',
+    name: 'system settings',
     component: layout,
     children: [
       {
@@ -76,7 +76,7 @@ const appRouter = [
   },
   {
     path: '/permission',
-    name: '权限管理',
+    name: 'permission',
     component: layout,
     children: [
       {
@@ -108,7 +108,7 @@ const appRouter = [
   },
   {
     path: '/organization',
-    name: '组织架构',
+    name: 'organization',
     component: layout,
     children: [
       {
@@ -125,7 +125,7 @@ const appRouter = [
   },
   {
     path: '/user',
-    name: '用户管理',
+    name: 'user',
     component: layout,
     children: [
       {

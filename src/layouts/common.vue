@@ -16,13 +16,13 @@
                 <router-link :to="{ name: 'requestlog'}" tag="label">
                     <q-btn flat round icon="explore">
                         <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
-                            审计日志
+                            {{$t('Request log')}}
                         </q-tooltip>
                     </q-btn>
                 </router-link>
                 <q-btn flat round icon="settings_backup_restore" @click="resetDb">
                     <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
-                        初始化数据
+                        {{$t('Initialization Data')}}
                     </q-tooltip>
                 </q-btn>
                 <q-btn flat round @click="toggleFullscreen()" :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" />
@@ -47,7 +47,8 @@
             </q-toolbar>
         </q-layout-footer>
 
-        <q-layout-drawer side="left" v-model="left" :overlay="leftOverlay" :behavior="leftBehavior" :breakpoint="leftBreakpoint" :content-style="{width:shrinkMenu?'60px':'250px'}" content-class="bg-grey-3">
+        <q-layout-drawer side="left" v-model="left" :overlay="leftOverlay" :behavior="leftBehavior" :breakpoint="leftBreakpoint"
+                         :content-style="{width:shrinkMenu?'60px':'250px'}" content-class="bg-grey-3">
 
             <!-- <q-list-header>Menu</q-list-header> -->
             <q-item v-show="!shrinkMenu" style="padding:10px">
@@ -66,10 +67,10 @@
                         <q-list link style="min-width: 100px">
                             <q-list-header>{{userInfo.name}}</q-list-header>
                             <q-item>
-                                <q-item-main label="个人中心" @click.native="userinfo" />
+                                <q-item-main :label="$t('User info')" @click.native="userinfo" />
                             </q-item>
                             <q-item>
-                                <q-item-main label="退出" @click.native="logOut" />
+                                <q-item-main :label="$t('Logout')" @click.native="logOut" />
                             </q-item>
                         </q-list>
                     </q-popover>
@@ -79,9 +80,10 @@
 
         </q-layout-drawer>
 
-        <q-layout-drawer side="right" v-model="right" :overlay="rightOverlay" :behavior="rightBehavior" :breakpoint="rightBreakpoint" :content-class="$q.theme === 'mat' ? 'bg-grey-3' : null" :content-style="{fontSize: '16px',width:'400px'}">
+        <q-layout-drawer side="right" v-model="right" :overlay="rightOverlay" :behavior="rightBehavior" :breakpoint="rightBreakpoint"
+                         :content-class="$q.theme === 'mat' ? 'bg-grey-3' : null" :content-style="{fontSize: '16px',width:'400px'}">
             <q-scroll-area class="fit">
-                <q-list-header>布局管理</q-list-header>
+                <q-list-header>{{$t('Layout management')}}</q-list-header>
                 <div class="row no-wrap justify-center">
                     <div class="col gutter-xs q-pr-xs" style="max-width: 180px;">
                         <div>
@@ -227,6 +229,7 @@ import FtyModuleTabs from "src/components/FtyModuleTabs";
 import TagsView from "./components/TagsView";
 import {resetDb} from "@/service/other/resetdb"
 import util from "@/libs/util";
+
 export default {
   components: {
     FtyMenu,
@@ -299,7 +302,8 @@ export default {
   methods: {
     init() {
       util.setCurrentPath(this, this.$route.name);
-      //直接在地址栏输入，或者按刷新按钮，根据当前路由更新module
+      // 直接在地址栏输入，或者按刷新按钮，根据当前路由更新module
+      // Enter directly in the address bar, or press the refresh button to update based on the current route module
       util.setCurrentModule(this, this.$route.name);
     },
     userinfo() {
@@ -326,23 +330,23 @@ export default {
     async resetDb() {
       try {
         await this.$q.dialog({
-          title: "初始化数据",
-          message: "确认执行操作？",
+          title: this.$t("Initialization Data"),
+          message: this.$t("Confirm execution") + "？",
           position: "right",
           ok: {
             push: true,
-            label: "确定"
+            label: this.$t("Ok")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await resetDb();
         this.$q.notify({
           type: "positive",
-          message: "初始化成功,请刷新浏览器",
+          message: this.$t("successfulinitdata"),
           position: "bottom-right"
         });
       } catch (e) {}
@@ -354,12 +358,14 @@ export default {
   watch: {
     $route(to) {
       util.setCurrentPath(this, to.name);
-      //直接在地址栏输入，或者按刷新按钮，根据当前路由更新module
+      // 直接在地址栏输入，或者按刷新按钮，根据当前路由更新module
+      // Enter directly in the address bar, or press the refresh button to update based on the current route module
       util.setCurrentModule(this, this.$route.name);
     }
   }
 };
 </script>
+
 <style>
 .fade-enter-active,
 .fade-enter {

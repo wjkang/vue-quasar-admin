@@ -6,12 +6,13 @@
         <q-icon slot="right" name="edit" />
       </q-card-title> -->
             <q-card-main style="height:80%">
-                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id"
+                         :pagination.sync="serverPagination" @request="request" :loading="loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
                     <template slot="top-left" slot-scope="props">
-                        <q-input v-model="filter.name"  type="text" prefix="角色名称：" />&nbsp;&nbsp;
-                        <q-input v-model="filter.code"  type="text" prefix="角色编码：" />&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="search" @click="search">查询</q-btn>&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="add" @click="addRole">新增</q-btn>
+                        <q-input v-model="filter.name"  type="text" :prefix="$t('Role name') + '：'" />&nbsp;&nbsp;
+                        <q-input v-model="filter.code"  type="text" :prefix="$t('Role code') + '：'" />&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="search" @click="search">{{$t('Search')}}</q-btn>&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="add" @click="addRole">{{$t('Add')}}</q-btn>
                     </template>
                     <template slot="top-right" slot-scope="props">
                         <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
@@ -31,25 +32,25 @@
                 <q-toolbar slot="header">
                     <q-btn flat round dense @click="editModal = false" icon="reply" />
                     <q-toolbar-title>
-                        编辑
+                        {{$t('Edit')}}
                     </q-toolbar-title>
                 </q-toolbar>
                 <q-toolbar slot="footer">
                     <q-toolbar-title>
                     </q-toolbar-title>
-                    <q-btn round @click="saveRole">保存</q-btn>
-                    <q-btn round color="red" @click="editModal = false">取消</q-btn>
+                    <q-btn round @click="saveRole">{{$t('Save')}}</q-btn>
+                    <q-btn round color="red" @click="editModal = false">{{$t('Cancel')}}</q-btn>
                 </q-toolbar>
 
                 <div class="layout-padding">
                     <q-field :count="15">
-                        <q-input v-model="tempRole.name" float-label="角色名称" />
+                        <q-input v-model="tempRole.name" :float-label="$t('Role name')" />
                     </q-field>
                     <q-field :count="15">
-                        <q-input v-model="tempRole.code" float-label="角色编码" />
+                        <q-input v-model="tempRole.code" :float-label="$t('Role code')" />
                     </q-field>
                     <q-field :count="200">
-                        <q-input v-model="tempRole.description" type="textarea" :max-height="100" rows="7" float-label="角色描述" />
+                        <q-input v-model="tempRole.description" type="textarea" :max-height="100" rows="7" :float-label="$t('Role description')" />
                     </q-field>
                 </div>
             </q-modal-layout>
@@ -78,14 +79,14 @@ export default {
         {
           name: "name",
           required: true,
-          label: "角色名称",
+          label: this.$t("Role name"),
           align: "left",
           field: "name",
           sortable: true
         },
         {
           name: "code",
-          label: "角色编码",
+          label: this.$t("Role code"),
           field: "code",
           sortable: true,
           align: "left"
@@ -93,7 +94,7 @@ export default {
         {
           name: "id",
           required: true,
-          label: "操作",
+          label: this.$t("ID"),
           align: "left",
           field: "id"
         }
@@ -137,23 +138,23 @@ export default {
     async delRole(id) {
       try {
         await this.$q.dialog({
-          title: "删除",
-          message: "确认执行删除操作？",
+          title: this.$t("Delete"),
+          message: this.$t("Confirm the deletion？"),
           position: "right",
           ok: {
             push: true,
-            label: "删除"
+            label: this.$t("Delete")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await delRole({ id: id });
         this.$q.notify({
           type: "positive",
-          message: "删除成功",
+          message: this.$t("Successfully deleted"),
           position: "bottom-right"
         });
         this.search();
@@ -162,16 +163,16 @@ export default {
     async delRoles() {
       try {
         await this.$q.dialog({
-          title: "批量删除",
-          message: "确认执行批量删除操作？",
+          title: this.$t("Batch deletion"),
+          message: this.$t("Confirm the bulk delete operation？"),
           ok: {
             push: true,
-            label: "删除"
+            label: this.$t("Delete")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await delRoles({
@@ -183,7 +184,7 @@ export default {
         });
         this.$q.notify({
           type: "positive",
-          message: "批量删除成功",
+          message: this.$t("Successfully deleted"),
           position: "bottom-right"
         });
         this.selected = [];
@@ -205,7 +206,7 @@ export default {
       await saveRole(this.tempRole);
       this.$q.notify({
         type: "positive",
-        message: "保存成功",
+        message: this.$t("Saved successfully"),
         position: "bottom-right"
       });
       this.editModal = false;

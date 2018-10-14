@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col">
         <h1 class="text-jumbo text-ginormous">Oops!</h1>
-        <h2>这个页面什么也没有</h2>
+        <h2>{{$t('This page has nothing')}}</h2>
       </div>
       <div class="col">
         <img :src="errGif" width="313" height="428" alt="Girl has dropped her ice cream.">
