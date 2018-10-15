@@ -2,12 +2,13 @@
     <div style="padding:10px">
         <q-card inline class="fit shadow-6">
             <q-card-main style="height:80%">
-                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id"
+                         :pagination.sync="serverPagination" @request="request" :loading="loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
                     <template slot="top-left" slot-scope="props">
-                        <q-input v-model="filter.name"  type="text" prefix="用户名称：" />&nbsp;&nbsp;
-                        <q-input v-model="filter.email"  type="text" prefix="用户邮箱：" />&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="search" @click="search">查询</q-btn>&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="add" @click="addUser">新增</q-btn>
+                        <q-input v-model="filter.name"  type="text" :prefix="$t('Username') + '：'" />&nbsp;&nbsp;
+                        <q-input v-model="filter.email"  type="text" :prefix="$t('Email') + '：'" />&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="search" @click="search">{{$t('Search')}}</q-btn>&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="add" @click="addUser">{{$t('Add')}}</q-btn>
                     </template>
                     <template slot="top-right" slot-scope="props">
                         <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
@@ -27,25 +28,25 @@
                 <q-toolbar slot="header">
                     <q-btn flat round dense @click="editModal = false" icon="reply" />
                     <q-toolbar-title>
-                        编辑
+                        {{$t('Edit')}}
                     </q-toolbar-title>
                 </q-toolbar>
                 <q-toolbar slot="footer">
                     <q-toolbar-title>
                     </q-toolbar-title>
-                    <q-btn round @click="saveUser">保存</q-btn>
-                    <q-btn round color="red" @click="editModal = false">取消</q-btn>
+                    <q-btn round @click="saveUser">{{$t('Save')}}</q-btn>
+                    <q-btn round color="red" @click="editModal = false">{{$t('Cancel')}}</q-btn>
                 </q-toolbar>
 
                 <div class="layout-padding">
                     <q-field :count="15">
-                        <q-input v-model="tempUser.name" float-label="账号名称" />
+                        <q-input v-model="tempUser.name" :float-label="$t('Account Name')" />
                     </q-field>
                     <q-field :count="15">
-                        <q-input v-model="tempUser.trueName" float-label="用户名称" />
+                        <q-input v-model="tempUser.trueName" :float-label="$t('Username')" />
                     </q-field>
                     <q-field :count="15">
-                        <q-input v-model="tempUser.email" float-label="用户邮箱" />
+                        <q-input v-model="tempUser.email" :float-label="$t('Email')" />
                     </q-field>
                      <q-field :count="15">
                         <q-input v-model="tempUser.phone" float-label="Phone" />
@@ -77,28 +78,28 @@ export default {
         {
           name: "name",
           required: true,
-          label: "账号名称",
+          label: this.$t("Account Name"),
           align: "left",
           field: "name",
           sortable: true
         },
         {
           name: "trueName",
-          label: "用户名称",
+          label: this.$t("Username"),
           field: "trueName",
           sortable: true,
           align: "left"
         },
         {
           name: "email",
-          label: "邮箱",
+          label: this.$t("Email"),
           field: "email",
           sortable: true,
           align: "left"
         },
         {
           name: "phone",
-          label: "Phone",
+          label: this.$t("Phone"),
           field: "phone",
           sortable: true,
           align: "left"
@@ -106,7 +107,7 @@ export default {
         {
           name: "id",
           required: true,
-          label: "操作",
+          label: this.$t("ID"),
           align: "left",
           field: "id"
         }
@@ -151,23 +152,23 @@ export default {
     async delUser(id) {
       try {
         await this.$q.dialog({
-          title: "删除",
-          message: "确认执行删除操作？",
+          title: this.$t("Delete"),
+          message: this.$t("Confirm the deletion？"),
           position: "right",
           ok: {
             push: true,
-            label: "删除"
+            label: this.$t("Delete")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await delUser({ id: id });
         this.$q.notify({
           type: "positive",
-          message: "删除成功",
+          message: this.$t("Successfully deleted"),
           position: "bottom-right"
         });
         this.search();
@@ -176,16 +177,16 @@ export default {
     async delUsers() {
       try {
         await this.$q.dialog({
-          title: "批量删除",
-          message: "确认执行批量删除操作？",
+          title: this.$t("Batch deletion"),
+          message: this.$t("Confirm the bulk delete operation？"),
           ok: {
             push: true,
-            label: "删除"
+            label: this.$t("Delete")
           },
           cancel: {
             push: true,
             color: "negative",
-            label: "取消"
+            label: this.$t("Cancel")
           }
         });
         await delUsers({
@@ -197,7 +198,7 @@ export default {
         });
         this.$q.notify({
           type: "positive",
-          message: "批量删除成功",
+          message: this.$t("Batch delete succeeded"),
           position: "bottom-right"
         });
         this.selected = [];
@@ -219,7 +220,7 @@ export default {
       await saveUser(this.tempUser);
       this.$q.notify({
         type: "positive",
-        message: "保存成功",
+        message: this.$t("Saved successfully"),
         position: "bottom-right"
       });
       this.editModal = false;

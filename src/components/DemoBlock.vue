@@ -14,10 +14,12 @@
     </q-page>
 
 </template>
+
 <script>
 import "highlight.js/styles/github.css";
 export default {};
 </script>
+
 <style scoped>
 main {
   min-height:0px!important;

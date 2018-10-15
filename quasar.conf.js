@@ -1,8 +1,10 @@
 // Configuration for your app
 const path = require('path')
+
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
+
 var md = require('markdown-it')();
 var striptags = require('./strip-tags');
 var wrap = function (render) {
@@ -12,16 +14,19 @@ var wrap = function (render) {
       .replace('<code>', '<code class="hljs">');
   };
 };
+
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function ($0) {
     return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16));
   });
   return str;
 }
+
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
     plugins: [
+      'i18n',
       'vuelidate',
       'permission',
       'demo-block'

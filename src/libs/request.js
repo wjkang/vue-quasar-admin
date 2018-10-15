@@ -16,7 +16,7 @@ service.interceptors.request.use(config => {
   // Do something before request is sent
   if (!permission.check(config)) {
     Notify.create({
-      message: "没有请求权限"
+      message: this.$t("No request permission")
     })
     throw "403"
   }
@@ -53,7 +53,7 @@ service.interceptors.response.use(
       removeToken();
       if (error.config.url.indexOf("logout") === -1) {
         Notify.create({
-          message: '登陆信息已过期,请重新登陆!'
+          message: this.$t('loginexpired')
         })
       }
       setTimeout(() => {
@@ -64,12 +64,12 @@ service.interceptors.response.use(
 
     } else if (error.response && error.response.status === 500) {
       Notify.create({
-        message: '系统错误!',
+        message: this.$t('System error') + '!',
         position: 'bottom-right'
       })
     } else if (error.message.indexOf("timeout")>-1) {
       Notify.create({
-        message: '网络超时!',
+        message: this.$t('Network timeout') + '!',
         position: 'bottom-right'
       })
     }
@@ -77,7 +77,7 @@ service.interceptors.response.use(
 
     } else {
       Notify.create({
-        message: '网络错误!',
+        message: this.$t('Network error') + '!',
         position: 'bottom-right'
       })
     }

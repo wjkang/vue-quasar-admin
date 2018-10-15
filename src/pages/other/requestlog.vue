@@ -2,7 +2,8 @@
   <div style="padding:10px">
     <q-card inline class="fit shadow-6">
       <q-card-main style="height:80%">
-        <q-table ref="table" color="primary" :data="serverData" :columns="columns" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+        <q-table ref="table" color="primary" :data="serverData" :columns="columns" row-key="id" :pagination.sync="serverPagination" @request="request"
+                 :loading="loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
           <template slot="top-right" slot-scope="props">
             <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
           </template>
@@ -33,7 +34,7 @@ export default {
         {
           name: "createdByName",
           required: true,
-          label: "用户",
+          label: this.$t("User"),
           align: "left",
           field: "createdByName"
         },
@@ -47,25 +48,25 @@ export default {
         {
           name: "method",
           required: true,
-          label: "方法",
+          label: this.$t("Method"),
           align: "left",
           field: "method"
         },
         {
           name: "request",
-          label: "请求",
+          label: this.$t("Request"),
           field: "request",
           align: "left"
         },
         {
           name: "time",
-          label: "耗时(ms)",
+          label: this.$t("Time (ms)"),
           field: "time",
           align: "left"
         },
         {
           name: "createdDate",
-          label: "时间",
+          label: this.$t("Created"),
           field: "createdDate",
           sortable: true,
           align: "left"

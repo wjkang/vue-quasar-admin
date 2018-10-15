@@ -1,9 +1,6 @@
 import { Loading, QSpinnerGears,QSpinnerHourglass } from 'quasar'
 
-
-
 let loading = {
-
 }
 let lastRequest = new Date('2018');
 

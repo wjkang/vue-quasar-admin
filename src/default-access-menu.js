@@ -2,8 +2,8 @@ export const defaultAccessMenu = [
     {
         path: "",
         icon: "settings",
-        title: "网站",
-        name: "网站",
+        title: "Website",
+        name: "website",
         leftMemu: true,
         children: [
             {
@@ -16,7 +16,7 @@ export const defaultAccessMenu = [
                     {
                         path: "article",
                         icon: "settings",
-                        title: "文章管理",
+                        title: "Articles",
                         name: "article",
                         leftMemu: true
                     }
@@ -27,21 +27,21 @@ export const defaultAccessMenu = [
     {
         path: "",
         icon: "settings",
-        title: "系统",
-        name: "系统",
+        title: "System",
+        name: "system",
         leftMemu: true,
         children: [
             {
                 path: "/system",
                 icon: "settings",
-                title: "系统设置",
-                name: "系统设置",
+                title: "System settings",
+                name: "system settings",
                 leftMemu: true,
                 children: [
                     {
                         path: "menu",
                         icon: "settings",
-                        title: "菜单管理",
+                        title: "Menu management",
                         name: "menu",
                         leftMemu: true
                     }
@@ -50,42 +50,42 @@ export const defaultAccessMenu = [
             {
                 path: "/permission",
                 icon: "settings",
-                title: "权限管理",
-                name: "权限管理",
+                title: "Authority management",
+                name: "permission",
                 leftMemu: true,
                 children: [
                     {
                         path: "function",
                         icon: "settings",
-                        title: "功能管理",
+                        title: "Function management",
                         name: "function",
                         leftMemu: true
                     },
                     {
                         path: "role",
                         icon: "settings",
-                        title: "角色管理",
+                        title: "Role management",
                         name: "role",
                         leftMemu: true
                     },
                     {
                         path: "rolepermission",
                         icon: "settings",
-                        title: "角色权限管理",
+                        title: "Role rights management",
                         name: "rolepermission",
                         leftMemu: true
                     },
                     {
                         path: "roleuser",
                         icon: "settings",
-                        title: "角色用户管理",
+                        title: "Role user management",
                         name: "roleuser",
                         leftMemu: true
                     },
                     {
                         path: "userrole",
                         icon: "settings",
-                        title: "用户角色管理",
+                        title: "Role user management",
                         name: "userrole",
                         leftMemu: true
                     }
@@ -94,21 +94,21 @@ export const defaultAccessMenu = [
             {
                 path: "/organization",
                 icon: "settings",
-                title: "组织架构",
-                name: "组织架构",
+                title: "Organization",
+                name: "organization",
                 leftMemu: true,
                 children: [
                     {
                         path: "department",
                         icon: "settings",
-                        title: "部门管理",
+                        title: "Department",
                         name: "department",
                         leftMemu: true
                     },
                     {
                         path: "position",
                         icon: "settings",
-                        title: "职位管理",
+                        title: "Position management",
                         name: "position",
                         leftMemu: true
                     }
@@ -117,14 +117,14 @@ export const defaultAccessMenu = [
             {
                 path: "/user",
                 icon: "settings",
-                title: "用户管理",
-                name: "用户管理",
+                title: "User Management",
+                name: "user",
                 leftMemu: true,
                 children: [
                     {
                         path: "index",
                         icon: "settings",
-                        title: "用户管理",
+                        title: "User Management",
                         name: "user_index",
                         leftMemu: true
                     }
@@ -139,12 +139,12 @@ export const defaultAccessMenu = [
         children: [
             {
                 path: "home",
-                title: "首页",
+                title: "Home",
                 name: "home_index"
             },
             {
                 path: "userinfo",
-                title: "个人中心",
+                title: "Profile / User info",
                 name: "userinfo"
             }
         ]

@@ -12,13 +12,14 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mavon-editor": "^2.6.3",
+    "vue-i18n": "^8.1.0",
     "vuelidate": "^0.6.2"
   },
   "devDependencies": {
-    "quasar-cli": "^0.15.14",
-    "vue-markdown-loader": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
-    "markdown-it-container": "^2.0.0"
+    "markdown-it-container": "^2.0.0",
+    "quasar-cli": "^0.15.14",
+    "vue-markdown-loader": "^2.4.1"
   },
   "engines": {
     "node": ">= 8.9.0",

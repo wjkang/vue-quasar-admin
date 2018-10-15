@@ -2,17 +2,18 @@
     <div style="padding:10px">
         <q-card inline class="fit shadow-6">
             <q-card-main style="height:80%">
-                <q-table ref="table" color="primary" :data="serverData" :columns="columns" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+                <q-table ref="table" color="primary" :data="serverData" :columns="columns" row-key="id" :pagination.sync="serverPagination" @request="request"
+                         :loading="loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
                     <template slot="top-left" slot-scope="props">
-                        <q-input v-model="filter.name" type="text" prefix="用户名称：" />&nbsp;&nbsp;
-                        <q-input v-model="filter.email" type="text" prefix="用户邮箱：" />&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="search" @click="search">查询</q-btn>&nbsp;&nbsp;
+                        <q-input v-model="filter.name" type="text" :prefix="$t('Username') + '：'" />&nbsp;&nbsp;
+                        <q-input v-model="filter.email" type="text" :prefix="$t('Email') + '：'" />&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="search" @click="search">{{$t('Search')}}</q-btn>&nbsp;&nbsp;
                     </template>
                     <template slot="top-right" slot-scope="props">
                         <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
                     </template>
                     <q-td slot="body-cell-id" slot-scope="props" :props="props" style="width:150px">
-                        <q-btn glossy dense color="primary" icon="edit" label="角色列表" @click="editUserRole(props)"></q-btn>
+                        <q-btn glossy dense color="primary" icon="edit" :label="$t('Role list')" @click="editUserRole(props)"></q-btn>
                     </q-td>
                 </q-table>
             </q-card-main>
@@ -22,16 +23,17 @@
                 <q-toolbar slot="header">
                     <q-btn flat round dense @click="editModal = false" icon="reply" />
                     <q-toolbar-title>
-                        编辑用户&nbsp;
-                        <q-chip small>{{userName}}</q-chip>&nbsp;所属角色列表
+                      {{$t('Edit user')}}&nbsp;
+                        <q-chip small>{{userName}}</q-chip>&nbsp;{{$t('List of roles')}}
                     </q-toolbar-title>
                 </q-toolbar>
                 <div style="padding:20px">
-                    <q-table ref="usertable" color="primary" :data="userRole.serverData" :columns="userRole.columns" row-key="id" :pagination.sync="userRole.serverPagination" @request="userRoleRequest" :loading="userRole.loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+                    <q-table ref="usertable" color="primary" :data="userRole.serverData" :columns="userRole.columns" row-key="id" :pagination.sync="userRole.serverPagination"
+                             @request="userRoleRequest" :loading="userRole.loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
                         <template slot="top-left" slot-scope="props">
-                            <q-input v-model="userRole.filter.name" type="text" prefix="角色名称：" />&nbsp;&nbsp;
-                            <q-input v-model="userRole.filter.code" type="text" prefix="角色编码：" />&nbsp;&nbsp;
-                            <q-btn push dense color="primary" icon="search" @click="searchUserRole">查询</q-btn>&nbsp;&nbsp;
+                            <q-input v-model="userRole.filter.name" type="text" :prefix="$t('Role name') + '：'" />&nbsp;&nbsp;
+                            <q-input v-model="userRole.filter.code" type="text" :prefix="$t('Role code') + '：'" />&nbsp;&nbsp;
+                            <q-btn push dense color="primary" icon="search" @click="searchUserRole">{{$t('Search')}}</q-btn>&nbsp;&nbsp;
                         </template>
                         <template slot="top-right" slot-scope="props">
                             <q-btn flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
@@ -64,28 +66,28 @@ export default {
         {
           name: "name",
           required: true,
-          label: "账号名称",
+          label: this.$t("Account Name"),
           align: "left",
           field: "name",
           sortable: true
         },
         {
           name: "trueName",
-          label: "用户名称",
+          label: this.$t("Username"),
           field: "trueName",
           sortable: true,
           align: "left"
         },
         {
           name: "email",
-          label: "邮箱",
+          label: this.$t("Email"),
           field: "email",
           sortable: true,
           align: "left"
         },
         {
           name: "phone",
-          label: "Phone",
+          label: this.$t("Phone"),
           field: "phone",
           sortable: true,
           align: "left"
@@ -93,7 +95,7 @@ export default {
         {
           name: "id",
           required: true,
-          label: "操作",
+          label: this.$t("ID"),
           align: "left",
           field: "id"
         }
@@ -117,20 +119,20 @@ export default {
           {
             name: "name",
             required: true,
-            label: "角色名称",
+            label: this.$t("Role name"),
             align: "left",
             field: "name"
           },
           {
             name: "code",
-            label: "角色编码",
+            label: this.$t("Role code"),
             field: "code",
             align: "left"
           },
           {
             name: "id",
             required: true,
-            label: "操作",
+            label: this.$t("ID"),
             align: "left",
             field: "id"
           }
@@ -218,13 +220,13 @@ export default {
       if (action == 1) {
         this.$q.notify({
           type: "positive",
-          message: "添加成功",
+          message: this.$t("Added successfully"),
           position: "bottom-right"
         });
       } else {
         this.$q.notify({
           type: "positive",
-          message: "移除成功",
+          message: this.$t("Successfully removed"),
           position: "bottom-right"
         });
       }

@@ -6,28 +6,28 @@
           <q-item-side style="min-width:100px">
             <q-item-tile>
               <q-chip color="primary">
-                {{item.Name}}
+                {{$t(item.Name)}}
               </q-chip>
             </q-item-tile>
           </q-item-side>
           <q-item-main>
-            <q-checkbox v-for="value in item.values" :key="value.name" v-model="item.selectedValues" :val="value" :label="value.Name" style="min-width:150px" />
-            <q-list no-border v-show="item.Name!='发货地'&&item.selectedValues.length>0">
+            <q-checkbox v-for="value in item.values" :key="value.name" v-model="item.selectedValues" :val="value" :label="$t(value.Name)" style="min-width:150px" />
+            <q-list no-border :v-show="item.Name!=$t('Place of delivery')&&item.selectedValues.length>0">
               <q-item>
                 <q-item-main>
                   <span style="display:inline-block;min-width:100px">
                     <q-chip color="light">
-                      {{item.Name}}
+                      {{$t(item.Name)}}
                     </q-chip>
                   </span>
                   <span style="display:inline-block;min-width:350px">
                     <q-chip color="light">
-                      自定义名称
+                      {{$t('Custom name')}}
                     </q-chip>
                   </span>
-                  <span v-if="item.Name=='颜色'" style="display:inline-block;min-width:300px">
+                  <span :v-if="item.Name=='Color'" style="display:inline-block;min-width:300px">
                     <q-chip color="light">
-                      图片
+                      {{$t('Image')}}
                     </q-chip>
                   </span>
                 </q-item-main>
@@ -35,12 +35,12 @@
               <q-item v-for="selectedValue in item.selectedValues" :key="selectedValue.name">
                 <q-item-main>
                   <span style="display:inline-block;min-width:100px">
-                    {{selectedValue.Name}}
+                    {{$t(selectedValue.Name)}}
                   </span>
                   <span style="display:inline-block;min-width:350px">
                     <q-input v-model="selectedValue.DefinitionName" style="width:250px" color="primary" />
                   </span>
-                  <span v-if="item.Name=='颜色'" style="display:inline-block;min-width:300px">
+                  <span :v-if="item.Name=='Color'" style="display:inline-block;min-width:300px">
                     <q-uploader color="secondary" auto-expand url="url" />
                   </span>
                 </q-item-main>
@@ -53,27 +53,27 @@
     </q-list>
     <div class="skus-container">
       <div class="row">
-        <div class="col-12" style="text-align:left">下表的零售价是最终展示给买家的产品价格。</div>
+        <div class="col-12" style="text-align:left">{{$t('The retail price in the table below is the price of the product that is ultimately displayed to the buyer')}}.</div>
       </div>
       <div class="row gutter-sm">
-        <div>批量设置零售价:</div>
+        <div>{{$t('Set retail price in bulk')}}:</div>
         <div>
           <q-input style="width:100px" value=""/>
         </div>
-        <div><q-btn push dense color="primary" label="确定"/></div>
-        <div>批量设置库存:</div>
+        <div><q-btn push dense color="primary" :label="$t('Define')"/></div>
+        <div>{{$t('Set inventory in batches')}}:</div>
         <div>
           <q-input style="width:100px" value=""/>
         </div>
-        <div><q-btn push dense color="primary" label="确定"/></div>
+        <div><q-btn push dense color="primary" :label="$t('Define')"/></div>
       </div>
       <div class="row bg-primary text-white" style="height:40px;line-height:40px">
-        <div class="col q-pl-md" v-for="item in properties" v-if="item.selectedValues.length>0" :key="item.Name">{{item.Name}}</div>
+        <div class="col q-pl-md" v-for="item in properties" v-if="item.selectedValues.length>0" :key="item.Name">{{$t(item.Name)}}</div>
         <div class="col q-pl-md">
-          <span class="c_red">*</span>零售价</div>
+          <span class="c_red">*</span>{{$t('Retail price')}}</div>
         <div class="col">
-          <span class="c_red">*</span>库存</div>
-        <div class="col">商品编码</div>
+          <span class="c_red">*</span>{{$t('In stock')}}</div>
+        <div class="col">{{$t('Commodity code')}}</div>
       </div>
       <div class="row" v-for="(sku,index) in skus" :key="index">
         <div class="col q-pl-md" v-for="item in properties" v-if="item.selectedValues.length>0" :key="item.Id">{{getValueName(sku,item)}}</div>
@@ -93,7 +93,7 @@ export default {
       properties: [
         {
           Id: 10,
-          Name: "材质",
+          Name: "Material",
           values: [
             {
               PropertyId: 10,
@@ -105,28 +105,28 @@ export default {
             {
               PropertyId: 10,
               Id: 477,
-              Name: "铝",
+              Name: "Aluminum",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 529,
-              Name: "帆布",
+              Name: "Canvas",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 365211,
-              Name: "棉布",
+              Name: "Cotton",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 365212,
-              Name: "斜纹布",
+              Name: "Twill fabric",
               DefinitionName: "",
               ImageUrl: ""
             },
@@ -140,28 +140,28 @@ export default {
             {
               PropertyId: 10,
               Id: 396,
-              Name: "皮革",
+              Name: "Leather",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 365213,
-              Name: "微纤维",
+              Name: "Microfiber",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 1064,
-              Name: "合成橡胶",
+              Name: "Synthetic rubber",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 63,
-              Name: "尼龙",
+              Name: "Nylon",
               DefinitionName: "",
               ImageUrl: ""
             },
@@ -175,14 +175,14 @@ export default {
             {
               PropertyId: 10,
               Id: 124,
-              Name: "塑料",
+              Name: "Plastic",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 10,
               Id: 48,
-              Name: "涤纶",
+              Name: "Polyester",
               DefinitionName: "",
               ImageUrl: ""
             },
@@ -210,7 +210,7 @@ export default {
             {
               PropertyId: 10,
               Id: 1170,
-              Name: "硅胶",
+              Name: "Silica gel",
               DefinitionName: "",
               ImageUrl: ""
             },
@@ -224,7 +224,7 @@ export default {
             {
               PropertyId: 10,
               Id: 1042,
-              Name: "真皮",
+              Name: "Genuine leather",
               DefinitionName: "",
               ImageUrl: ""
             },
@@ -238,7 +238,7 @@ export default {
             {
               PropertyId: 10,
               Id: 4,
-              Name: "其它",
+              Name: "Other",
               DefinitionName: "",
               ImageUrl: ""
             },
@@ -261,12 +261,12 @@ export default {
         },
         {
           Id: 14,
-          Name: "颜色",
+          Name: "Color",
           values: [
             {
               PropertyId: 14,
               Id: 771,
-              Name: "米色",
+              Name: "Beige",
               DefinitionName: "Transparent",
               ImageUrl:
                 "https://g04.a.alicdn.com/kf/HTB1B0TWOVXXXXalXVXXq6xXFXXXn.jpg"
@@ -274,7 +274,7 @@ export default {
             {
               PropertyId: 14,
               Id: 193,
-              Name: "黑色",
+              Name: "Black",
               DefinitionName: "Mixture",
               ImageUrl:
                 "https://g01.a.alicdn.com/kf/HTB13ZPMOVXXXXa2aXXXq6xXFXXXU.jpg"
@@ -282,7 +282,7 @@ export default {
             {
               PropertyId: 14,
               Id: 173,
-              Name: "蓝色",
+              Name: "Blue",
               DefinitionName: "Random",
               ImageUrl:
                 "https://g02.a.alicdn.com/kf/HTB1pC_COVXXXXakapXXq6xXFXXXU.jpg"
@@ -290,7 +290,7 @@ export default {
             {
               PropertyId: 14,
               Id: 1254,
-              Name: "天蓝色",
+              Name: "Sky blue",
               DefinitionName: "Brown",
               ImageUrl:
                 "https://g03.a.alicdn.com/kf/HTB1wj3lOVXXXXaxXXXXq6xXFXXX9.jpg"
@@ -298,7 +298,7 @@ export default {
             {
               PropertyId: 14,
               Id: 365458,
-              Name: "褐色",
+              Name: "Brown",
               DefinitionName: "Purple",
               ImageUrl:
                 "https://g01.a.alicdn.com/kf/HTB1SPcjOVXXXXcrXXXXq6xXFXXX5.jpg"
@@ -306,7 +306,7 @@ export default {
             {
               PropertyId: 14,
               Id: 100018786,
-              Name: "透明",
+              Name: "Transparent",
               DefinitionName: "Blue",
               ImageUrl:
                 "https://g01.a.alicdn.com/kf/HTB1L9vDOVXXXXXAapXXq6xXFXXXY.jpg"
@@ -314,7 +314,7 @@ export default {
             {
               PropertyId: 14,
               Id: 350850,
-              Name: "金色",
+              Name: "Gold",
               DefinitionName: "Cyan",
               ImageUrl:
                 "https://g02.a.alicdn.com/kf/HTB1TCcjOVXXXXaUXXXXq6xXFXXX8.jpg"
@@ -322,133 +322,133 @@ export default {
             {
               PropertyId: 14,
               Id: 691,
-              Name: "灰色",
+              Name: "Gray",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 200004890,
-              Name: "深灰色",
+              Name: "Dark gray",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 175,
-              Name: "绿色",
+              Name: "Green",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 200004889,
-              Name: "军绿色",
+              Name: "ArmyGreen",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 200002130,
-              Name: "象牙白",
+              Name: "Ivory white",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 200001438,
-              Name: "卡其色",
+              Name: "Khaki",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 200003699,
-              Name: "多色",
+              Name: "Multicolor",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 350852,
-              Name: "橙色",
+              Name: "Orange",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 1052,
-              Name: "粉色",
+              Name: "Pink",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 496,
-              Name: "紫色",
+              Name: "Purple",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 200004891,
-              Name: "紫罗兰",
+              Name: "Violet",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 10,
-              Name: "红色",
+              Name: "Red",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 350853,
-              Name: "银色",
+              Name: "Silver",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 29,
-              Name: "白色",
+              Name: "White",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 366,
-              Name: "黄色",
+              Name: "Yellow",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 201447303,
-              Name: "玫瑰色",
+              Name: "Rose",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 201447325,
-              Name: "深红",
+              Name: "Crimson",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 201447326,
-              Name: "深蓝",
+              Name: "Dark blue",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 14,
               Id: 202007806,
-              Name: "磨砂黑",
+              Name: "Matte Black",
               DefinitionName: "",
               ImageUrl: ""
             }
@@ -457,7 +457,7 @@ export default {
         },
         {
           Id: 200007763,
-          Name: "发货地",
+          Name: "Place of delivery",
           values: [
             {
               PropertyId: 200007763,
@@ -534,19 +534,19 @@ export default {
         },
         {
           Id: 200000828,
-          Name: "套餐",
+          Name: "Package",
           values: [
             {
               PropertyId: 200000828,
               Id: 201655809,
-              Name: "壳＋贴膜",
+              Name: "Shell + film",
               DefinitionName: "",
               ImageUrl: ""
             },
             {
               PropertyId: 200000828,
               Id: 201655810,
-              Name: "壳＋挂绳",
+              Name: "Shell + lanyard",
               DefinitionName: "",
               ImageUrl: ""
             }
@@ -680,6 +680,7 @@ export default {
   }
 };
 </script>
+
 <style lang="stylus" scoped>
 .skus-container {
   width: 100%;

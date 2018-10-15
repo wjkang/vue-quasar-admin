@@ -4,11 +4,11 @@
     <div class="row">
       <div class="col">
         <h1 class="text-jumbo text-ginormous">Oops!</h1>
-        <h2>你没有权限去该页面</h2>
+        <h2>{{$t("You don't have permission to go to this page")}}</h2>
         <ul class="list-unstyled">
-          <li>或者你可以去:</li>
+          <li>{{$t('Or you can go')}}:</li>
           <li class="link-type">
-            <router-link to="/home">回首页</router-link>
+            <router-link to="/home">{{$t('Back to home')}}</router-link>
           </li>
         </ul>
       </div>

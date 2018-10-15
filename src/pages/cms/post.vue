@@ -2,12 +2,13 @@
     <div style="padding:10px">
         <q-card inline class="fit shadow-6">
             <q-card-main style="height:80%">
-                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id" :pagination.sync="serverPagination" @request="request" :loading="loading" rows-per-page-label="每页数据" no-data-label="没有数据">
+                <q-table ref="table" color="primary" :data="serverData" :columns="columns" selection="multiple" :selected.sync="selected" row-key="id"
+                         :pagination.sync="serverPagination" @request="request" :loading="loading" :rows-per-page-label="$t('Rows per page')" :no-data-label="$t('No data')">
                     <template slot="top-left" slot-scope="props">
-                        <q-input v-model="filter.name" type="text" prefix="标题：" />&nbsp;&nbsp;
-                        <q-btn push dense color="primary" icon="search" @click="search">查询</q-btn>&nbsp;&nbsp;
+                        <q-input v-model="filter.name" type="text" :prefix="$t('Title') + '：'" />&nbsp;&nbsp;
+                        <q-btn push dense color="primary" icon="search" @click="search">{{$t('Search')}}</q-btn>&nbsp;&nbsp;
                         <router-link :to="{ name: 'post_edit', params: { id:0 }}">
-                            <q-btn push dense color="primary" icon="add">新增</q-btn>
+                            <q-btn push dense color="primary" icon="add">{{$t('Add')}}</q-btn>
                         </router-link>
                     </template>
                     <template slot="top-right" slot-scope="props">
@@ -39,9 +40,9 @@
                                 <q-chip small dense color="secondary" v-for="tag in props.row.tags" :key="tag">{{tag}}</q-chip>
                             </q-td>
                             <q-td key="status" :props="props">
-                                <q-chip v-if="props.row.status==1" small color="faded">草稿</q-chip>
-                                <q-chip v-else-if="props.row.status==2" small color="primary">已发布</q-chip>
-                                <q-chip v-else-if="props.row.status==3" color="negative">已删除</q-chip>
+                                <q-chip v-if="props.row.status==1" small color="faded">{{$t('Draft')}}</q-chip>
+                                <q-chip v-else-if="props.row.status==2" small color="primary">{{$t('Published')}}</q-chip>
+                                <q-chip v-else-if="props.row.status==3" color="negative">{{$t('Deleted')}}</q-chip>
                             </q-td>
                             <q-td key="sort" :props="props">{{ props.row.sort }}</q-td>
                             <q-td key="publishedDate" :props="props">{{formatDate(props.row.publishedDate)}}</q-td>
@@ -84,28 +85,28 @@ export default {
         {
           name: "title",
           required: true,
-          label: "标题",
+          label: this.$t("Title"),
           align: "left",
           field: "title",
           sortable: true
         },
         {
           name: "catelog",
-          label: "分类",
+          label: this.$t("Classification"),
           field: "catelog",
           sortable: true,
           align: "left"
         },
         {
           name: "tags",
-          label: "标签",
+          label: this.$t("Tags"),
           field: "tags",
           sortable: false,
           align: "left"
         },
         {
           name: "status",
-          label: "状态",
+          label: this.$t("Status"),
           field: "status",
           sortable: true,
           align: "left"
@@ -114,7 +115,7 @@ export default {
           name: "sort",
           required: true,
           sortable: true,
-          label: "排序",
+          label: this.$t("Sort"),
           align: "left",
           field: "sort"
         },
@@ -122,7 +123,7 @@ export default {
           name: "publishedDate",
           required: true,
           sortable: true,
-          label: "发布日期",
+          label: this.$t("Published date"),
           align: "left",
           field: "publishedDate"
         },
@@ -130,7 +131,7 @@ export default {
           name: "createdDate",
           required: true,
           sortable: true,
-          label: "创建日期",
+          label: this.$t("Created date"),
           align: "left",
           field: "createdDate"
         },
@@ -138,14 +139,14 @@ export default {
           name: "updatedDate",
           required: true,
           sortable: true,
-          label: "更新日期",
+          label: this.$t("Updated date"),
           align: "left",
           field: "updatedDate"
         },
         {
           name: "id",
           required: true,
-          label: "操作",
+          label: this.$t("ID"),
           align: "left",
           field: "id"
         }
