@@ -4,6 +4,8 @@
     </a>
 </p>
 
+代码太丑，不建议照搬，可以看一看 RBAC 的实现思路，这是通用的。
+
 ## vue-quasar-admin
 &emsp;&emsp;[Quasar-Framework](https://quasar-framework.org/) 是一款基于vue.js开发的开源的前端框架, 它能帮助web开发者快速创建以下网站：响应式网站，渐进式应用，手机应用(通过Cordova)，跨平台应用(通过Electron)。
 &emsp;&emsp;Quasar允许开发者在只写一次代码的情况下发布到多个平台 website, PWA ,Mobile App 和 Electron App 在使用Quasar的时候, 你甚至不需要Hammerjs, Momentjs, 或者Bootstrap, Quasar框架内包含了已经这些东西,你可以很简单就使用到。
