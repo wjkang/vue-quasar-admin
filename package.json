@@ -18,7 +18,7 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
     "markdown-it-container": "^2.0.0",
-    "quasar-cli": "^0.15.14",
+    "quasar-cli": "^0.17.26",
     "vue-markdown-loader": "^2.4.1"
   },
   "engines": {
