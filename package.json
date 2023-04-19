@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "mavon-editor": "^2.6.3",
+    "mavon-editor": "^2.8.2",
     "vue-i18n": "^8.1.0",
     "vuelidate": "^0.6.2"
   },
